@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sao-Bing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <style>
+        html,body{
+            width:100%;
+            height:100%;
+        }
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            font-family: "Exo", sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .taskdata li{
+            list-style: none;
+            display:inline-block;
+            float:left;
+        }
+        .taskdata span{
+            list-style: none;
+            display:inline-block;
+            float:right;
+        }
+        .zhezhao{
+            background:rgba(0,0,0,0.6);
+            position:fixed;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            z-index:11;
+        }
+        .logmain{
+            position:fixed;
+            width:80%;
+            height:50%;
+            left:10%;
+            right:10%;
+            top:15%;
+            background:#fff;
+            z-index:99;
+            border-radius:10px;
+            line-height:20px;
+            font-size:12px;
+            padding:15px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page" style="color:#333;font-size:20px;font-weight:700;">Sao-Bing</li>
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-md-12" style="position:relative;">
+            <div style="width:80%;margin:0 auto;height:30px;text-align:center;line-height:30px;display:none;position:absolute;top:10px;left:0;right:0;z-index:99;border-radius:3px;" class="alert1 alert-danger" role="alert1">
+                
+            </div>
+            <div class="col-md-12 alert alert-primary " role="alert">
+                为了您的财产安全，请关闭京东免密支付。
+            </div>
+            <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded ouerdate" style="position:relative;">
+                <p></p>
+            </div>
+            <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded ouerzc" style="position:relative;text-align:right;">
+                <h6 style="text-align: left;white-space:pre-wrap;"></h6>
+                <p style="text-align: left;white-space:pre-wrap;"></p>
+                <button type="button" class="btn btn-success btn-zc" style="margin-top:8px;">查询账号资产</button>
+            </div>
+            <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded ouerinif" style="position:relative;">
+                <p>请关闭免密支付以及打开支付验密</p>
+                <p>建议微信绑定账户以保证提现能到账</p>
+                <button style="display:none;position:absolute;bottom:0px;right:0px;" type="button" class="btn btn-info">剩余车位：0</button>
+            </div>
+            <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded ouerupdata" style="position:relative;">
+                <p>账号：<span id="uname" style="color:red;"></span></p>
+                <label for="exampleInputEmail1">Cookie</label>
+                <input type="text" class="form-control upcookie" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="exampleInputEmail1">账号备注</label>
+                <input type="text" class="form-control upbeizhu" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <button type="button" class="btn btn-success btn-delete" style="margin-top:8px;">删除cookie</button>
+                <button type="button" class="btn btn-success btn-updata" style="margin-top:8px;">更新cookie</button>
+                <button type="button" class="btn btn-success btn-logout" style="margin-top:8px;">退出</button>
+            </div>
+            <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded ouerserve" style="text-align: center;">
+                <label for="exampleInputEmail1">选择服务器（节点）</label>
+                <select class="form-control form-control-sm selectid">
+                </select>
+            </div>
+            <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded formid" style="display:none;text-align: center;">
+                <label for="exampleInputEmail1">Cookie</label>
+                <input type="text" class="form-control cookie" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <label for="exampleInputEmail1">账号备注</label>
+                <input type="text" class="form-control beizhu" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <button type="button" class="btn btn-success btn-post" style="margin-top:8px;">上车</button>
+            </div>
+            <div class="col-md-12 shadow-lg p-3 mb-3 bg-white rounded taskdata" style="display:none;text-align: left;">
+                <h6 style="color:red;text-align: center">任务中心</h6>
+                <div class="taskmain" style="font-size:14px;">
+                    <!-- <p>任务开始---点击查看任务</p> -->
+                </div>
+            </div>
+            <div style="display:none;" class="zhezhao"></div>
+            <div style="display:none;" class="logmain">
+                <h6 class="logmain-name" style="color:red;"></h6>
+                <p style="white-space:pre-wrap;" class="logcenter"></p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script>
+    $(function(){
+        //判断是手机端还是pc端
+        function isPc(){
+            if(window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
+              return true; // 移动端
+            }else{
+              return false; // PC端
+            }
+        }
+        // if(!isPc()){
+        //   window.location.href = "/"
+        //   return;
+        // }
+        var api = "/";
+        var _id = localStorage.getItem("jd_cookie_id");
+        // console.log(_id)
+        if (_id !="null"&& typeof _id !== 'undefined' && _id !== null){
+            $('.ouerinif').hide();$('.ouerserve').hide();$(".formid").hide();$('.alert').hide();
+            var name = localStorage.getItem("jd_cookie_uname");
+            var value = localStorage.getItem("jd_cookie_cookie");
+            var beizhu = localStorage.getItem("jd_cookie_beizhu");
+            var datett = localStorage.getItem("jd_cookie_date");
+            $(".ouerdate>p").text("当前cookie有效期大概剩余"+day(datett)+"天");
+            $("#uname").text(name);
+            $('.upcookie').val(value);
+            $('.upbeizhu').val(beizhu);
+            task();
+        }else{
+            $('.ouerupdata').hide();
+            $(".ouerdate").hide();
+            $(".ouerzc").hide();
+            $(".taskdata").hide();
+            init();
+        }
+
+        function init(){
+            $.ajax({
+                url: api+"api/serverlist",
+                type: "GET",
+                data: {},
+                dataType: "json",
+                async: false,  // 默认是true
+                success: function (result) {
+                    // console.log(result)
+                    if(result.code ==400){
+                        localStorage.setItem("qltoken",null);
+                        $('.alert1').show().text(result.message);
+                        setTimeout(function(){
+                            $('.alert1').hide().text("");
+                        },2000)
+                    }else if(result.code ==200){
+                        localStorage.setItem("qltoken",result.token);
+                        // localStorage.getItem("qltoken")
+                        $('.breadcrumb-item').text(result.title);
+                        $('.alert').html(result.Announcement);
+                        var data = result.list;
+                        var optionHtml = `<option value="-1">请选择代挂节点</option>`
+                        $('.selectid').empty();
+                        for(var i = 0;i<data.length;i++){
+                            optionHtml+=`<option value="${i}">${data[i].QLName}</option>`
+                        }
+                        $('.selectid').html(optionHtml)
+                    }
+                }
+            }); 
+        }
+
+        $(".selectid").on("change",function(){
+            var num = $("option:selected",this).val();
+            localStorage.setItem("jd_cookie_url",num);
+            if(num==-1){
+                $('.formid').hide();
+                return;
+            }
+            var token = localStorage.getItem("qltoken");
+            if(!token){
+                $('.alert1').show().text("配置有错，请修正");
+                    setTimeout(function(){
+                        $('.alert1').css('background','#f8d7da').hide().text("");
+                    },2000)
+                    $('.formid').hide();
+                return;
+            }
+            $.ajax({
+                url: api+"api/serverdetails",
+                type: "GET",
+                data: {number:num,token:token},
+                dataType: "json",
+                async: false,  // 默认是true
+                success: function (result) {
+                    // console.log(result)
+                    if(result.code ==400){
+                        $('.alert1').show().css('background','#f8d7da').text("配置有错，请修正");
+                        setTimeout(function(){
+                            $('.alert1').hide().text("");
+                        },2000)
+                        localStorage.setItem("qltoken",null);
+                        $('.formid').hide();
+                    }else if(result.code ==200){
+                        localStorage.setItem("qltoken",result.token);
+                        window.count = parseInt(result.count)
+                        $('.btn-info').show().text("剩余车位："+result.count);
+                        $('.formid').show();
+                        $('.alert1').show().css('background','#20c997').text("切换成功");
+                        setTimeout(function(){
+                            $('.alert1').hide().text("");
+                        },2000)
+                    }
+                }
+            }); 
+        });
+
+        $('.btn-post').on('click',function(){
+            var cookie = $('.cookie').val();
+            var CookieValue = cookie.match(/pt_key=.+?;/) + cookie.match(/pt_pin=.+?;/);
+            var remarks = $('.beizhu').val();
+            
+            var num = $("option:selected").val();
+            localStorage.setItem("jd_cookie_url",num);
+            if(num==-1){
+                $('.formid').hide();
+                return;
+            }
+            // console.log(CookieValue)
+            var token = localStorage.getItem("qltoken");
+            if(cookie && remarks && num){
+                if(CookieValue==0){
+                    $('.alert1').show().css('background','#f8d7da').text("cookie格式错误，请重新获取填写");
+                    setTimeout(function(){
+                        $('.alert1').hide().text("");
+                    },2000)
+                }else if(window.count==0){
+                    $('.alert1').show().css('background','#f8d7da').text("没有车位了，请换一个吧！！");
+                    setTimeout(function(){
+                        $('.alert1').hide().text("");
+                    },2000)
+                }
+                else{
+                    $.ajax({
+                        url: api+"api/serveritem",
+                        type: "POST",
+                        data: {remarks:remarks,token:token,value:CookieValue,number:num},
+                        dataType: "json",
+                        async: false,  // 默认是true
+                        success: function (result) {
+                            // console.log(result)
+                            if(result.code ==200){
+                                $('.alert1').show().css('background','#20c997').text("提交成功，感谢使用");
+                                $('.cookie').val("");
+                                $('.beizhu').val("");
+                                setTimeout(function(){
+                                    $('.alert1').hide().text("");
+                                },2000)
+                                $("#uname").text(result.name);
+                                $('.upcookie').val(result.data.data[0].value);
+                                $('.upbeizhu').val(result.data.data[0].remarks);
+                                localStorage.setItem("jd_cookie_uname",result.name);
+                                localStorage.setItem("jd_cookie_cookie",result.data.data[0].value);
+                                localStorage.setItem("jd_cookie_beizhu",result.data.data[0].remarks);
+                                localStorage.setItem("jd_cookie_id",result.data.data[0]._id);
+                                var daydd = dateEnd(30);
+                                localStorage.setItem("jd_cookie_date",daydd);
+                                $(".ouerdate>p").text("当前cookie有效期大概剩余"+day(daydd)+"天");
+                                $('.ouerupdata').show();$(".ouerdate").show();$(".ouerzc").show();
+                                $('.ouerinif').hide();$('.ouerserve').hide();$(".formid").hide();$('.alert').hide();
+                                task();
+                            }else{
+                                $('.alert1').show().css('background','#f8d7da').text("提交失败，请重新提交");
+                                setTimeout(function(){
+                                    $('.alert1').hide().text("");
+                                },2000)
+                            }
+                        }
+                    });
+                }
+            }else{
+                $('.alert1').show().css('background','#f8d7da').text("您的cookie或备注不能为空");
+                setTimeout(function(){
+                    $('.alert1').hide().css('background','#f8d7da').text("");
+                },2000)
+            }
+            
+        })
+
+        function dateEnd(day){
+            var date1 = new Date();
+            var date2 = new Date(date1);
+            date2.setDate(date1.getDate() + day);
+            return date2
+        }
+
+        function day(daytime){
+            var endTime = new Date(daytime).getTime() //还款日
+            var nowTime = new Date().getTime() // 今天
+            var nTime = endTime - nowTime
+            var day = Math.floor(nTime/86400000); //天数差
+            return day
+        }
+
+        // 清除数据、
+        $(".btn-logout").on('click',function(){
+            localStorage.setItem("jd_cookie_uname",null);
+            localStorage.setItem("jd_cookie_cookie",null);
+            localStorage.setItem("jd_cookie_beizhu",null);
+            localStorage.setItem("jd_cookie_id",null);
+            localStorage.setItem("jd_cookie_date",null);
+            $('.ouerupdata').hide();
+            $(".taskdata").hide();
+            $('.ouerinif').show();$('.ouerserve').show();$(".formid").hide();$(".ouerdate").hide();$(".ouerzc").hide();$('.alert').show();
+            init();
+        })
+
+        // 更新数据
+        $(".btn-updata").on("click",function(){
+            var url = localStorage.getItem("jd_cookie_url");
+            var cookie = $('.upcookie').val();
+            var remarks = $('.upbeizhu').val();
+            var _id = localStorage.getItem("jd_cookie_id");
+            var token = localStorage.getItem("qltoken");
+            var CookieValue = cookie.match(/pt_key=.+?;/) + cookie.match(/pt_pin=.+?;/);
+            if(cookie && remarks && url){
+                if(CookieValue==0){
+                    $('.alert1').show().css('background','#f8d7da').text("cookie格式错误，请重新获取填写");
+                    setTimeout(function(){
+                        $('.alert1').hide().text("");
+                    },2000)
+                }else{
+                    $.ajax({
+                        url: api+"api/serveritemup/",
+                        type: "POST",
+                        data: {remarks:remarks,token:token,value:CookieValue,number:url,_id:_id},
+                        dataType: "json",
+                        async: false,  // 默认是true
+                        success: function (result) {
+                            // console.log(result)
+                            if(result.code ==200){
+                                if(!result.data.data){
+                                    localStorage.setItem("jd_cookie_uname",null);
+                                    localStorage.setItem("jd_cookie_cookie",null);
+                                    localStorage.setItem("jd_cookie_beizhu",null);
+                                    localStorage.setItem("jd_cookie_id",null);
+                                    localStorage.setItem("jd_cookie_date",null);
+                                    $('.ouerupdata').hide();
+                                    $('.ouerinif').show();$('.ouerserve').show();$(".formid").hide();$(".ouerdate").hide();$(".ouerzc").hide();$('.alert').show();
+                                    init();
+                                }else{
+                                    $('.alert1').show().css('background','#20c997').text("cookie更新成功");
+                                    setTimeout(function(){
+                                        $('.alert1').hide().text("");
+                                    },2000)
+                                    $("#uname").text(result.name);
+                                    $('.upcookie').val(result.data.data.value);
+                                    $('.upbeizhu').val(result.data.data.remarks);
+                                    localStorage.setItem("jd_cookie_uname",result.name);
+                                    localStorage.setItem("jd_cookie_cookie",result.data.data.value);
+                                    localStorage.setItem("jd_cookie_beizhu",result.data.data.remarks);
+                                    localStorage.setItem("jd_cookie_id",result.data.data._id);
+                                    var daydd = dateEnd(30);
+                                    localStorage.setItem("jd_cookie_date",daydd);
+                                    $(".ouerdate>p").text("当前cookie有效期大概剩余"+day(daydd)+"天");
+                                    $('.ouerupdata').show();$(".ouerdate").show();$(".ouerzc").show();
+                                    $('.ouerinif').hide();$('.ouerserve').hide();$(".formid").hide();$('.alert').hide();
+                                }
+                            }else{
+                                $('.alert1').show().css('background','#f8d7da').text("更新失败，请重新更新");
+                                setTimeout(function(){
+                                    $('.alert1').hide().text("");
+                                },2000)
+                            }
+                        }
+                    });
+                }
+            }else{
+                $('.alert1').show().css('background','#f8d7da').text("您的cookie或备注不能为空");
+                setTimeout(function(){
+                    $('.alert1').hide().css('background','#f8d7da').text("");
+                },2000)
+            }
+            
+        })
+
+        $(".btn-delete").on("click",function(){
+            var _id = localStorage.getItem("jd_cookie_id");
+            var url = localStorage.getItem("jd_cookie_url");
+            var token = localStorage.getItem("qltoken");
+            $.ajax({
+                url: api+"api/serveritemdelete/",
+                type: "POST",
+                data: {_id:_id,token:token,number:url},
+                dataType: "json",
+                async: false,  // 默认是true
+                success: function (result) {
+                    // console.log(result)
+                    if(result.code ==200){
+                        $('.alert1').show().css('background','#20c997').text("cookie删除成功");
+                        setTimeout(function(){
+                            $('.alert1').hide().text("");
+                            localStorage.setItem("jd_cookie_uname",null);
+                            localStorage.setItem("jd_cookie_cookie",null);
+                            localStorage.setItem("jd_cookie_beizhu",null);
+                            localStorage.setItem("jd_cookie_id",null);
+                            localStorage.setItem("jd_cookie_date",null);
+                            $('.ouerupdata').hide();$(".taskdata").hide();
+                            $('.ouerinif').show();$('.ouerserve').show();$(".formid").hide();$(".ouerdate").hide();$(".ouerzc").hide();$('.alert').show();
+                            init();
+                        },2000)
+                    }else{
+                        $('.alert1').show().css('background','#f8d7da').text("删除失败，请重新尝试");
+                        setTimeout(function(){
+                            $('.alert1').hide().text("");
+                        },2000)
+                    }
+                }
+            });
+        });
+
+        // 查询资产
+        $(".btn-zc").on("click",function(){
+            $(".ouerzc").show();
+            var cookie = localStorage.getItem("jd_cookie_cookie");
+            $.ajax({
+                url: api+"api/zc/",
+                type: "POST",
+                data: {cookie:cookie},
+                dataType: "json",
+                timeout:30000, //超时时间
+                beforeSend:function(){
+                    $(".ouerzc>h6").show().text("正在请求中，时间较长，请稍等...");
+                },
+                complete:function(){
+                    $(".ouerzc>h6").text("").hide();
+                },
+                success: function (result) {
+                    // console.log(result)
+                    if(result.code ==200){
+                        $('.alert1').show().css('background','#20c997').text("查询成功");
+                        setTimeout(function(){
+                            $('.alert1').hide().text("");
+                            
+                        },1000)
+                        $(".ouerzc>p").text(result.data);
+                    }else{
+                        $('.alert1').show().css('background','#f8d7da').text("查询失败，请稍后尝试");
+                        setTimeout(function(){
+                            $('.alert1').hide().text("");
+                        },2000)
+                    }
+                }
+            });
+        });
+        
+        // 任务列表
+       function task(){
+        var url = localStorage.getItem("jd_cookie_url");
+        var token = localStorage.getItem("qltoken");
+        $.ajax({
+            url: api+"api/task/",
+            type: "GET",
+            data: {number:url,token:token},
+            dataType: "json",
+            timeout:30000, //超时时间
+            success: function (result) {
+                // console.log(result)
+                if(result.code==200){
+                    $(".taskdata").show();
+                    $(".taskmain").empty();
+                    for(var i = 0;i<result.data.length;i++){
+                        $(".taskmain").append(`<p dataid="${result.data[i]._id}">${result.data[i].name}---点击查看任务</p>`);
+                    }
+                }else{
+                    $(".taskdata").hide();
+                }
+            }
+        });
+       }
+
+       $(document).on("click",".taskmain>p",function(){
+
+           var url = localStorage.getItem("jd_cookie_url");
+            var token = localStorage.getItem("qltoken");
+            var id = $(this).attr("dataid");
+            var name = localStorage.getItem("jd_cookie_uname");
+
+            $.ajax({
+            url: api+"api/taskitem/",
+            type: "GET",
+            data: {number:url,token:token,id:id,name:name},
+            dataType: "json",
+            timeout:30000, //超时时间
+            success: function (result) {
+                // console.log(result)
+                if(result.code==200){
+                    $('.zhezhao').show();
+                    $('.logmain').show();
+                    $(".logmain-name").text(name+"的任务日志")
+                    if(result.data==null){
+                        $('.logcenter').text("暂时没有任务数据");
+                    }else{
+                        $('.logcenter').text(result.data);
+                    }
+                }
+            }
+        });
+       })
+
+       $('.zhezhao').on("click",function(){
+            $('.zhezhao').hide();
+            $('.logmain').hide();
+       })
+
+    })
+</script>
+</html>

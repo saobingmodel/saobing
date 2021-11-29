@@ -1,0 +1,24 @@
+{
+  "name": "qlmodel",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.1.1",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "got": "^11.8.3",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1",
+    "puppeteer-core": "^11.0.0",
+    "querystring": "^0.2.1",
+    "request": "^2.88.2",
+    "tough-cookie": "^4.0.0"
+  }
+}

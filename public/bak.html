@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Sao-Bing</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <style>
+      html,body{
+        height:100%
+      }
+      body {
+        position: relative;
+        -webkit-perspective: 800px;
+        background-image: url(img/timg.jpeg);
+        background-size: 100% 100%;
+      }
+      
+      .content {
+        width: 100%;
+        height:100%;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .gonggao{
+        animation: gonggao-entry 2.5s ease-in-out;
+        position: absolute;
+        right:40px;
+        top:20px;
+        width:300px;
+        min-height:300px;
+        background: #111;
+        background: linear-gradient(#004746, #111111);
+        border: 6px solid #00a4a2;
+        box-shadow: 0 0 15px #00fffd;
+        border-radius: 5px;
+        z-index: 4;
+        transition: 1s all;
+      }
+       .gonggao>p{
+           animation: logo-entry 3s ease-in-out;
+          text-align: center;
+         color: #00a4a2;
+          font-size: 15px;
+       }
+      .login {
+        opacity: .8;
+        animation: form-entry 3s ease-in-out;
+        background: #111;
+        background: linear-gradient(#004746, #111111);
+        border: 6px solid #00a4a2;
+        box-shadow: 0 0 15px #00fffd;
+        border-radius: 5px;
+        min-height: 220px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 4;
+        width: 500px;
+        transition: 1s all;
+      }
+      
+      .test1 {
+        left: 100px;
+      }
+      
+      .test {
+        -webkit-transform: rotateX(70deg) scale(0.8);
+        -webkit-filter: blur(1px);
+        box-shadow: 0 20px 30px 3px rgba(0, 0, 0, .55);
+        opacity: .6;
+      }
+      
+      .login_title {
+        animation: input-entry 3s ease-in-out;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 18px;
+          color: #00a4a2;
+      }
+      
+      .logo {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        animation: text-glow 2s ease-out infinite alternate ,logo-entry 4s ease-in;
+        font-family: 'Ubuntu', sans-serif;
+        color: #00a4a2;
+        font-size: 40px;
+        letter-spacing: 2px;
+        font-weight: bold;
+        text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 50px #000, 0 0 60px #000, 0 0 70px #000;
+        top: 50px;
+      }
+      
+      .logo:before {
+        animation: before-glow 2s ease-out infinite alternate;
+        border-left: 535px solid transparent;
+        border-bottom: 10px solid #00a4a2;
+        content: ' ';
+        height: 0;
+        position: absolute;
+        right: -74px;
+        top: -10px;
+        width: 0;
+      }
+      
+      .logo:after {
+        animation: after-glow 2s ease-out infinite alternate;
+        border-left: 100px solid transparent;
+        border-top: 16px solid #00a4a2;
+        content: ' ';
+        height: 0;
+        position: absolute;
+        right: -85px;
+        top: 24px;
+        transform: rotate(-47deg);
+        width: 0;
+      }
+      
+      .bg {
+        width: 100%;
+        height:100%;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      
+      #circle1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: circle1 4s linear infinite, circle-entry 6s ease-in-out;
+        background: #000;
+        border-radius: 50%;
+        border: 10px solid #00a4a2;
+        box-shadow: 0 0 0 2px black, 0 0 0 6px #00fffc;
+        height: 500px;
+        width: 500px;
+        overflow: hidden;
+        opacity: 0.4;
+        z-index: -3;
+      }
+      
+      #inner-cirlce1 {
+        box-sizing: border-box;
+        background: #000;
+        border-radius: 50%;
+        border: 36px solid #00fffc;
+        height: 460px;
+        width: 460px;
+        margin: 10px;
+      }
+      
+      #inner-cirlce1:before {
+        content: ' ';
+        width: 240px;
+        height: 480px;
+        background: #000;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      
+      #inner-cirlce1:after {
+        content: ' ';
+        width: 480px;
+        height: 240px;
+        background: #000;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .col-md-12{
+        background:rgba(0,0,0,0);
+      }
+      select{
+        background: rgba(0,0,0,0) !important;
+        color: #00a4a2 !important;
+        border-color: #00a4a2 !important;
+      }
+      input{
+        background: rgba(0,0,0,0) !important;
+        color: #00a4a2 !important;
+        border-color: #00a4a2 !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="logo breadcrumb-item">
+      Sao-Bing
+    </div>
+    <div class="gonggao">
+      <p style="margin-top:10px;font-size:18px;">公告</p>
+      <p class="alert" style="margin-top:15px;color:#00a4a2;text-align: left;" role="alert">
+        为了您的财产安全，请关闭京东免密支付。
+      </p>
+    </div>
+    <div class="bg">
+      <div id="circle1">
+        <div id="inner-cirlce1"></div>
+      </div>
+      </div>
+      <div class="content">
+        <div class="login" id="login">
+          <div class="login_title">
+            <div class="container">
+              <div class="row justify-content-md-center">
+                <div class="col-md-12" style="position:relative;">
+                  <button style="background:rgba(0,0,0,0);display:none;position:absolute;bottom:-11px;right:-4px;border:none;color:#00a4a2;" type="button" class="btn btn-info">剩余车位：0</button>
+                  <div style="width:80%;margin:0 auto;height:30px;text-align:center;line-height:30px;display:none;position:absolute;top:10px;left:0;right:0;z-index:99;border-radius:3px;" class="alert1 alert-danger" role="alert1">
+                      
+                  </div>
+                  <div class="col-md-12 shadow-lg p-3 rounded" style="text-align: center;">
+                      <label for="exampleInputEmail1">选择服务器（节点）</label>
+                      <select class="form-control form-control-sm selectid">
+                      </select>
+                  </div>
+                  <div class="col-md-12 shadow-lg p-3 rounded formid" style="display:none;text-align: center;">
+                      <label for="exampleInputEmail1">Cookie</label>
+                      <input type="text" class="form-control cookie" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <label for="exampleInputEmail1">备注</label>
+                      <input type="text" class="form-control beizhu" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <button type="button" style="margin-top:10px;background:#00a4a2;" class="btn btn-success">提交</button>
+                  </div>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    $(function(){
+      //判断是手机端还是pc端
+        function isPc(){
+            if(window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
+              return true; // 移动端
+            }else{
+              return false; // PC端
+            }
+        }
+        if(isPc()){
+          window.location.href = "/m.html"
+          return;
+        }
+        var api = "/"
+        $.ajax({
+            url: api+"api/serverlist",
+            type: "GET",
+            data: {},
+            dataType: "json",
+            async: false,  // 默认是true
+            success: function (result) {
+                // console.log(result)
+                if(result.code ==400){
+                    localStorage.setItem("qltoken",null);
+                    $('.alert1').show().text(result.message);
+                    setTimeout(function(){
+                        $('.alert1').hide().text("");
+                    },2000)
+                }else if(result.code ==200){
+                    localStorage.setItem("qltoken",result.token);
+                    // localStorage.getItem("qltoken")
+                    $('.breadcrumb-item').text(result.title);
+                    $('.alert').html(result.Announcement);
+                    var data = result.list;
+                    var optionHtml = `<option value="-1">请选择代挂节点</option>`
+                    $('.selectid').empty();
+                    for(var i = 0;i<data.length;i++){
+                        optionHtml+=`<option value="${i}">${data[i].QLName}</option>`
+                    }
+                    $('.selectid').html(optionHtml)
+                }
+            }
+        }); 
+
+        $(".selectid").on("change",function(){
+            var num = $("option:selected",this).val();
+            if(num==-1){
+                $('.formid').hide();
+                return;
+            }
+            var token = localStorage.getItem("qltoken");
+            if(!token){
+                $('.alert1').show().text("配置有错，请修正");
+                    setTimeout(function(){
+                        $('.alert1').hide().text("");
+                    },2000)
+                    $('.formid').hide();
+                return;
+            }
+            $.ajax({
+                url: api+"api/serverdetails",
+                type: "GET",
+                data: {number:num,token:token},
+                dataType: "json",
+                async: false,  // 默认是true
+                success: function (result) {
+                    // console.log(result)
+                    if(result.code ==400){
+                        $('.alert1').show().text("配置有错，请修正");
+                        setTimeout(function(){
+                            $('.alert1').hide().text("");
+                        },2000)
+                        localStorage.setItem("qltoken",null);
+                        $('.formid').hide();
+                    }else if(result.code ==200){
+                        localStorage.setItem("qltoken",result.token);
+                        $('.btn-info').show().text("剩余车位："+result.count);
+                        $('.formid').show();
+                        $('.alert1').show().text("切换成功");
+                        setTimeout(function(){
+                            $('.alert1').hide().text("");
+                        },2000)
+                    }
+                }
+            }); 
+        });
+
+        $('.btn-success').on('click',function(){
+            var cookie = $('.cookie').val();
+            var remarks = $('.beizhu').val();
+            var num = $("option:selected").val();
+            if(num==-1){
+                $('.formid').hide();
+                return;
+            }
+            var CookieValue = cookie.match(/pt_key=.+?;/) + cookie.match(/pt_pin=.+?;/);
+            // console.log(CookieValue)
+            var token = localStorage.getItem("qltoken");
+            if(cookie && remarks && num){
+                if(CookieValue==0){
+                    $('.alert1').show().text("cookie格式错误，请重新获取填写");
+                    setTimeout(function(){
+                        $('.alert1').hide().text("");
+                    },2000)
+                }else{
+                    $.ajax({
+                        url: api+"api/serveritem",
+                        type: "POST",
+                        data: {remarks:remarks,token:token,value:CookieValue,number:num},
+                        dataType: "json",
+                        async: false,  // 默认是true
+                        success: function (result) {
+                            // console.log(result)
+                            if(result.code ==200){
+                                $('.alert1').show().text("提交成功，感谢使用");
+                                setTimeout(function(){
+                                    $('.alert1').hide().text("");
+                                },2000)
+                            }else{
+                                $('.alert1').show().text("提交失败，请重新提交");
+                                setTimeout(function(){
+                                    $('.alert1').hide().text("");
+                                },2000)
+                            }
+                        }
+                    });
+                }
+            }else{
+                $('.alert1').show().text("请填写有效的cookie");
+                setTimeout(function(){
+                    $('.alert1').hide().text("");
+                },2000)
+            }
+            
+        })
+    })
+</script>
+
+</html>

@@ -1,0 +1,130 @@
+  /* =========================================
+Animation Keyframes
+========================================= */
+      @keyframes gonggao-entry{
+      	  0% {
+          opacity: 0;
+          height:0;
+        }
+        100% {
+          opacity: 1;
+          height: 300px;
+        }
+      }
+      @keyframes logo-entry {
+        0% {
+          opacity: 0;
+        }
+        80% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes circle-entry {
+        0% {
+          opacity: 0;
+        }
+        20% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0.4;
+        }
+      }
+      
+      @keyframes input-entry {
+        0% {
+          opacity: 0;
+        }
+        90% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes form-entry {
+        0% {
+          height: 0;
+          width: 0;
+          opacity: 0;
+          padding: 0;
+        }
+        20% {
+          height: 0;
+          border: 1px solid #00a4a2;
+          width: 0;
+          opacity: 0;
+          padding: 0;
+        }
+        40% {
+          width: 0;
+          height: 220px;
+          border: 6px solid #00a4a2;
+          opacity: 1;
+          padding: 0;
+        }
+        100% {
+          height: 220px;
+          width: 500px;
+        }
+      }
+      
+      @keyframes box-glow {
+        0% {
+          border-color: #00b8b6;
+          box-shadow: 0 0 5px rgba(0, 255, 253, 0.2), inset 0 0 5px rgba(0, 255, 253, 0.1), 0 2px 0 #000;
+        }
+        100% {
+          border-color: #00fffc;
+          box-shadow: 0 0 20px rgba(0, 255, 253, 0.6), inset 0 0 10px rgba(0, 255, 253, 0.4), 0 2px 0 #000;
+        }
+      }
+      
+      @keyframes text-glow {
+        0% {
+          color: #00a4a2;
+          text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 50px #000, 0 0 60px #000, 0 0 70px #000;
+        }
+        100% {
+          color: #00fffc;
+          text-shadow: 0 0 20px rgba(0, 255, 253, 0.6), 0 0 10px rgba(0, 255, 253, 0.4), 0 2px 0 #000;
+        }
+      }
+      
+      @keyframes before-glow {
+        0% {
+          border-bottom: 10px solid #00a4a2;
+        }
+        100% {
+          border-bottom: 10px solid #00fffc;
+        }
+      }
+      
+      @keyframes after-glow {
+        0% {
+          border-top: 16px solid #00a4a2;
+        }
+        100% {
+          border-top: 16px solid #00fffc;
+        }
+      }
+      
+      @keyframes circle1 {
+        0% {
+          -moz-transform: rotate(0deg);
+          -ms-transform: rotate(0deg);
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+        100% {
+          -moz-transform: rotate(360deg);
+          -ms-transform: rotate(360deg);
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
