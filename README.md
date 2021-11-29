@@ -107,7 +107,7 @@ docker run --name saobing -p 6703:4000 -d -v "$(pwd)"/config.js:/app/config/conf
 ```
 4.配置docker映射目录下的config.js 默认地址 `/用户名/kingfeng/config.js`
 - 查看容器IP命令 `docker inspect --format='{{.NetworkSettings.IPAddress}}' 容器名`
-- 如QL_URL使用容器IP 青龙默认部署IP为`5700` 例如我容器IP是`172.13.1.33` 那我QL_URL就是`http://172.13.1.33:5700/`
+- 如QL_URL使用容器IP 青龙默认部署IP为`5700` 例如我容器IP是`172.13.1.33` 那我QL_URL就是`http://10.10.10.10:5700/`
 ### 更新
 ```docker
 docker kill saobing && docker rm saobing && docker rmi saobing/saobing
@@ -116,6 +116,7 @@ docker run --name saobing -p 6703:4000 -d -v "$(pwd)"/config.js:/app/config/conf
 ```
 ## 常见问题
 Q：是否支持内网端口？
+
 A：支持公网IP 域名 以及容器IP 推荐容器IP(安全性略高,速度稍微快)。
 
 Q：为什么访问主页出现错误空提示？  
