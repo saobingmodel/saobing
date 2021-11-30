@@ -21,9 +21,6 @@ saobing 仅支持 qinglong 2.9+
 saobing不支持任何arm架构设备
 
 本项目 不提供 `技术上的任何帮助`
-
-
-不支持也没办法 .NET不支持
 ## 特性
 - [x] docker一键部署
 - [x] 用户添加/更新cookies 检测是否过期 添加备注 
